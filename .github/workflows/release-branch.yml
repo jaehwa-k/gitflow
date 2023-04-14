@@ -17,9 +17,11 @@ jobs:
         id: check
         run: |
           if [ ${{ github.ref }} == 'refs/heads/main' ]; then
-            echo "::set-output name=haveChanges::false"
+            echo "Changes detected. Proceeding with release branch creation."
+            echo ::set-output name=haveChanges::true
           else
-            echo "::set-output name=haveChanges::true"
+            echo "No changes detected. Skipping release branch creation."
+            echo ::set-output name=haveChanges::false
           fi
       - name: Create Release Branch
         if: steps.check.outputs.haveChanges == 'true'
