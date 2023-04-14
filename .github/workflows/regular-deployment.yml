@@ -1,0 +1,20 @@
+name: Regular deployment
+on:
+  repository_dispatch:
+    types: [regular-deployment]
+jobs:
+    deploy:
+        if: contains(github.head_ref, 'release')
+        runs-on: ubuntu-latest
+        steps:
+          - uses: actions/checkout@v3
+            with:
+              fetch-depth: 0
+              ref: main
+          - run: |
+              git config user.name spendit-deployer
+              git config user.email server@spendit.kr
+              git merge origin/develop
+              git tag v${{ github.event.client_payload.versionName }}
+              git push origin main
+              git push origin v${{ github.event.client_payload.versionName }}
