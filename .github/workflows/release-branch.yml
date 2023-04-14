@@ -10,5 +10,3 @@ jobs:
     steps:
       - name: Checkout to develop
         uses: actions/checkout@v3
-        run: |
-          echo ${{ github.head_ref }}
