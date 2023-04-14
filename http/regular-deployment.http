@@ -1,0 +1,10 @@
+POST https://api.github.com/repos/jaehwa-k/gitflow/dispatches
+Accept: application/vnd.github.v3+json
+Authorization: Bearer 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
+
+{
+  "event_type": "regular-deployment",
+  "client_payload": {
+    "versionName": "0.0.1"
+  }
+}
