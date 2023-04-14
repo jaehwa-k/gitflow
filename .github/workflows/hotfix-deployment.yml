@@ -1,0 +1,22 @@
+name: Hotfix Deployment
+on:
+  push:
+    branches:
+      - main
+jobs:
+    deploy-hotfix:
+        if: ${{ contains(github.head_ref, 'hotfix') }}
+        name: create hotfix tag
+        runs-on: ubuntu-latest
+        steps:
+        - name: checkout to main
+          uses: actions/checkout@v3
+          with:
+            fetch-depth: 0
+            ref: main
+
+        - name: tagging version
+          run: |
+            HOTFIX_VERSION=`git describe --tags --abbrev=0 | awk -F. '{OFS="."; $NF+=1; print $0}'`
+            git tag $NEXT_VERSION
+            git push origin $NEXT_VERSION
