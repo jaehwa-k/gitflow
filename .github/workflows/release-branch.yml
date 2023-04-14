@@ -10,6 +10,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+        fetch-depth: 0
+        ref: develop
       - name: Check for Changes
         id: check
         run: |
@@ -21,10 +24,9 @@ jobs:
       - name: Create Release Branch
         if: steps.check.outputs.changes == 'true'
         run: |
-          RELEASE_VERSION_NAME=release/v0.0.1
+#         RELEASE_VERSION_NAME 수정 필요함
+          RELEASE_VERSION_NAME=release/v0.0.1 
           git config user.name spendit-deployer
           git config user.email server@spendit.kr
-          git checkout develop
           git branch $RELEASE_VERSION_NAME
-          git checkout $RELEASE_VERSION_NAME
           git push origin $RELEASE_VERSION_NAME
