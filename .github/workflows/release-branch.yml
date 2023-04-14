@@ -21,12 +21,6 @@ jobs:
           else
             echo "::set-output name=haveChanges::true"
           fi
-#          HAVE_CHANGES=`git diff --name-only develop main | wc -l`
-#          if [[ ${HAVE_CHANGES} != '0' ]]; then
-#            echo "::set-output name=haveChanges::false"
-#          else
-#            echo "::set-output name=haveChanges::true"
-#          fi
       - name: Create Release Branch
         if: steps.check.outputs.haveChanges == 'true'
         run: |
