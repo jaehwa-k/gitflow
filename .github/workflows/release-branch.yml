@@ -8,12 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     name: create release branch if there are commits to release on develop
     steps:
-      - name: Checkout code
+      - name: Checkout to develop
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          ref: develop
-
+        run: |
+          echo ${{ github.head_ref }}
+          echo ${{ github.base_ref }}
       - name: Create Release Branch
         if: ${{ git diff --name-only develop main | wc -l > 0 }}
         run: |
