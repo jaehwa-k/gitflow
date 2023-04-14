@@ -4,7 +4,8 @@ on:
     types: [regular-deployment]
 jobs:
     deploy:
-        if: contains(github.head_ref, 'release')
+      # 이거 좀 이상한데??? release 브랜치가 있으면 해당 브랜치로 checkout 한 다음에 진행해야지.
+        if: ${{ github.ref == 'ref/head/release' }}
         runs-on: ubuntu-latest
         steps:
           - uses: actions/checkout@v3
