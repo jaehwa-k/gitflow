@@ -13,18 +13,8 @@ jobs:
         with:
         fetch-depth: 0
         ref: develop
-      - name: Check for Changes
-        id: check
-        run: |
-          if [ ${{ github.ref }} == 'refs/heads/main' ]; then
-            echo "Changes detected. Proceeding with release branch creation."
-            echo ::set-output name=haveChanges::true
-          else
-            echo "No changes detected. Skipping release branch creation."
-            echo ::set-output name=haveChanges::false
-          fi
       - name: Create Release Branch
-        if: steps.check.outputs.haveChanges == 'true'
+        if: ${{ git diff --name-only develop main | wc -l > 0 }}
         run: |
 #         RELEASE_VERSION_NAME 수정 필요함
           RELEASE_VERSION_NAME=release/v0.0.1 
