@@ -1,4 +1,4 @@
-name: Regular deployment
+name: Regular Deployment
 on:
   repository_dispatch:
     types: [regular-deployment]
