@@ -16,10 +16,11 @@ jobs:
       - name: Check for Changes
         id: check
         run: |
-          if [[ $(git diff --name-only main develop | wc -l) -gt 0 ]]; then
-            echo "::set-output name=haveChanges::true"
-          else
+          HAVE_CHANGES=`git diff --name-only develop main | wc -l`
+          if [ HAVE_CHANGES != '0' ]; then
             echo "::set-output name=haveChanges::false"
+          else
+            echo "::set-output name=haveChanges::true"
           fi
       - name: Create Release Branch
         if: steps.check.outputs.haveChanges == 'true'
