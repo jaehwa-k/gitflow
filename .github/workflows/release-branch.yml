@@ -1,8 +1,30 @@
-name: release-branch
+name: Create Release Branch
 on:
   schedule:
     # 매주 금요일 오후 2시
     - cron: '00 14 * * 5'
 jobs:
-  have-issues-to-release:
-    name: check differences between main and develop branch
+  create-release-branch:
+    runs-on: ubuntu-latest
+    name: create release branch if there are commits to release on develop
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Check for Changes
+        id: check
+        run: |
+          if [ $(git diff --name-only main develop | wc -l) -gt 0 ]; then
+            echo "::set-output name=changes::true"
+          else
+            echo "::set-output name=changes::false"
+          fi
+      - name: Create Release Branch
+        if: steps.check.outputs.changes == 'true'
+        run: |
+          RELEASE_VERSION_NAME=release/v0.0.1
+          git config user.name spendit-deployer
+          git config user.email server@spendit.kr
+          git checkout develop
+          git branch $RELEASE_VERSION_NAME
+          git checkout $RELEASE_VERSION_NAME
+          git push origin $RELEASE_VERSION_NAME
