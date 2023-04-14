@@ -10,3 +10,11 @@ jobs:
     steps:
       - name: Checkout to develop
         uses: actions/checkout@v3
+      - name: Create Release Branch
+        if: ${{ git diff --name-only develop main | wc -l > 0 }}
+        run: |
+          RELEASE_VERSION_NAME=release/v0.0.1
+          git config user.name spendit-deployer
+          git config user.email server@spendit.kr
+          git branch $RELEASE_VERSION_NAME
+          git push origin $RELEASE_VERSION_NAME
