@@ -1,0 +1,8 @@
+name: release-branch
+on:
+  schedule:
+    # 매주 금요일 오후 2시
+    - cron: '00 14 * * 5'
+jobs:
+  have-issues-to-release:
+    name: check differences between main and develop branch
