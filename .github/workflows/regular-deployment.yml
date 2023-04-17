@@ -1,21 +1,21 @@
+# 정기배포
+# jira automation을 통해 해당 workflow를 실행
+# release 브랜치가 있다면 main 브랜치에 merge & push.
 name: Regular Deployment
 on:
   repository_dispatch:
     types: [regular-deployment]
 jobs:
-    deploy:
-      # 이거 좀 이상한데??? release 브랜치가 있으면 해당 브랜치로 checkout 한 다음에 진행해야지.
-        if: ${{ github.ref == 'ref/head/release' }}
+    merge-release:
+        if: ${{ contains(github.ref, 'release') }}
         runs-on: ubuntu-latest
         steps:
-          - uses: actions/checkout@v3
-            with:
-              fetch-depth: 0
-              ref: main
-          - run: |
-              git config user.name spendit-deployer
-              git config user.email server@spendit.kr
-              git merge origin/develop
-              git tag v${{ github.event.client_payload.versionName }}
+          - name: Checkout code
+            uses: actions/checkout@v3
+          - name: Merge release branch
+            if: startsWith(github.ref, 'refs/heads/release/')
+            run: |
+              echo "${{ github.ref }}"
+              git checkout main
+              git merge --no-ff --no-edit ${{ github.ref }}
               git push origin main
-              git push origin v${{ github.event.client_payload.versionName }}
