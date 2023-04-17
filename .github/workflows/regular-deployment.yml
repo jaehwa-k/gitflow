@@ -11,7 +11,7 @@ jobs:
         steps:
           - name: Check log
             run: |
-              if [[ ${{contains(github.head_ref, 'hotfix')}} == 'true' ]]; then
+              if [[ ${{contains(github.head_ref, 'hotfix')}} == false ]]; then
                 echo "release branch is not exist"
               else
                 echo ${{ github.head_ref }}
