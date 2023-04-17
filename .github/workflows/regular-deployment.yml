@@ -11,12 +11,9 @@ jobs:
         steps:
           - name: Check log
             run: |
-              echo "${{ github.ref }}"
-          - name: Checkout code
-            uses: actions/checkout@v3
-          - name: Merge release branch
-            if: startsWith(github.ref, 'refs/heads/release/')
-            run: |
-              git checkout main
-              git merge --no-ff --no-edit ${{ github.ref }}
-              git push origin main
+              if [ -z ${{ github.event.client_payload.release_branch }} ]; then
+                echo "release branch is not exist"
+                exit 1
+              else
+                echo "release branch is exist"
+              fi
