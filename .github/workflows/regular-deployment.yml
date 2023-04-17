@@ -15,4 +15,5 @@ jobs:
                 echo "release branch is not exist"
               else
                 echo ${{ github.head_ref }}
+                echo ${{ github.ref }}
               fi
