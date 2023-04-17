@@ -11,10 +11,11 @@ jobs:
         steps:
           - name: Checkout code
             uses: actions/checkout@v3
+            run: |
+              echo "${{ github.ref }}"
           - name: Merge release branch
             if: startsWith(github.ref, 'refs/heads/release/')
             run: |
-              echo "${{ github.ref }}"
               git checkout main
               git merge --no-ff --no-edit ${{ github.ref }}
               git push origin main
