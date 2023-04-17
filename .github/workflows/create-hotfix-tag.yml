@@ -2,7 +2,7 @@ name: Create Hotfix Tag
 on:
   pull_request:
     type: [closed]
-    branches: [main]
+    branches: [develop]
 jobs:
     hotfix-tagging:
 #        if: ${{ github.event.pull_request.merged == true }}
