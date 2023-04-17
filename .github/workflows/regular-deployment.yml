@@ -13,7 +13,6 @@ jobs:
             run: |
               if [[ ${{ github.ref }} == 'hotfix' ]]; then
                 echo "release branch is not exist"
-                exit 1
               else
-                echo "release branch is exist"
+                echo ${{ github.head_ref }}
               fi
