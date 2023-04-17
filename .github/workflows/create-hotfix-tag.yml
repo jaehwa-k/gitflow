@@ -20,3 +20,4 @@ jobs:
             HOTFIX_VERSION=`git describe --tags --abbrev=0 | awk -F. '{OFS="."; $NF+=1; print $0}'`
             git tag $HOTFIX_VERSION
             git push origin $HOTFIX_VERSION
+            echo "${{github.event.pull_request.merged}}"
