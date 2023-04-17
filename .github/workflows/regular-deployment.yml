@@ -9,11 +9,12 @@ jobs:
     merge-release:
         runs-on: ubuntu-latest
         steps:
+          - name: checkout to main
+            uses: actions/checkout@v3
+            with:
+              fetch-depth: 0
+              ref: main
           - name: Check log
             run: |
-              if [[ ${{contains(github.head_ref, 'hotfix')}} == true ]]; then
-                echo "release branch is not exist"
-              else
-                echo ${{ github.head_ref }}
-                echo ${{ github.ref }}
-              fi
+              RELEASE_VERSION='${github.event.client_payload.releaseName}'
+              echo $RELEASE_VERSION
