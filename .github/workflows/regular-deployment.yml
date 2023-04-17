@@ -16,5 +16,5 @@ jobs:
               ref: main
           - name: Check log
             run: |
-              RELEASE_VERSION='${github.event.client_payload.releaseName}'
+              RELEASE_VERSION=${github.event.client_payload.releaseName}
               echo $RELEASE_VERSION
