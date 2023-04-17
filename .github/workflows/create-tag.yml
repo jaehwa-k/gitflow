@@ -1,0 +1,18 @@
+name: Create Tag
+on:
+  push:
+    branches:
+      - main
+jobs:
+  create-tag:
+    name: create main tag
+    runs-on: ubuntu-latest
+    steps:
+    - name: create hotfix or release tag
+      run: |
+        if [[ ${{contains(github.head_ref, 'hotfix')}} == true ]]; then
+          echo "release branch is not exist"
+        else
+          echo ${{ github.head_ref }}
+          echo ${{ github.ref }}
+        fi
