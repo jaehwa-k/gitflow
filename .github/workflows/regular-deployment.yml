@@ -7,7 +7,6 @@ on:
     types: [regular-deployment]
 jobs:
     merge-release:
-        if: ${{ contains(github.ref, 'release') }}
         runs-on: ubuntu-latest
         steps:
           - name: Checkout code
