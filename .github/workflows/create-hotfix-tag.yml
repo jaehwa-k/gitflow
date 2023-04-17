@@ -1,11 +1,12 @@
-name: Hotfix Deployment
+name: Create Hotfix Tag
 on:
-  push:
+  pull_request:
     branches:
-      - main
+      - hotfix/*
+    types: [closed]
 jobs:
-    deploy-hotfix:
-        if: ${{ contains(github.ref, 'hotfix') }}
+    hotfix-tagging:
+        if: ${{ github.event.pull_request.merged == true }}
         name: create hotfix tag
         runs-on: ubuntu-latest
         steps:
@@ -18,5 +19,5 @@ jobs:
         - name: tagging version
           run: |
             HOTFIX_VERSION=`git describe --tags --abbrev=0 | awk -F. '{OFS="."; $NF+=1; print $0}'`
-            git tag $NEXT_VERSION
-            git push origin $NEXT_VERSION
+            git tag $HOTFIX_VERSION
+            git push origin $HOTFIX_VERSION
