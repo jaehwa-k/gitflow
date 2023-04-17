@@ -17,7 +17,7 @@ jobs:
           - name: Check log
             run: |
               RELEASE_VERSION="${{github.event.client_payload.releaseVersion}}"
-              git merge origin/$RELEASE_VERSION
+              git merge origin/release/$RELEASE_VERSION
               git tag v$RELEASE_VERSION
               git push origin main
               git push origin v$RELEASE_VERSION
