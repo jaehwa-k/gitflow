@@ -2,7 +2,7 @@ name: Create Hotfix Tag
 on:
   pull_request:
     branches:
-      - hotfix/*
+      - 'hotfix/*'
     types: [closed]
 jobs:
     hotfix-tagging:
