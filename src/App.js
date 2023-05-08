@@ -13,6 +13,4 @@ function App() {
   );
 }
 
-console.log('adada')
-
 export default App;
