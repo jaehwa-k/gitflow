@@ -2,9 +2,10 @@ name: Hotfix Deployment
 on:
   pull_request:
     types: [ closed ]
+    branches: [ main ]
 jobs:
     deploy-hotfix:
-        if: ${{ github.event.pull_request.merged == true && contains(github.head_ref, 'hotfix') }}
+        if: ${{ github.event.pull_request.merged == true }}
         name: create hotfix tag
         runs-on: ubuntu-latest
         steps:
