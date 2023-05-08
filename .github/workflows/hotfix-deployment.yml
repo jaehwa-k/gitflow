@@ -14,10 +14,8 @@ jobs:
           with:
             fetch-depth: 0
             ref: main
-
         - name: tagging version
           run: |
-#           HOTFIX_VERSION=git describe --tags --abbrev=0 | awk -F. '{OFS="."; $NF+=1; print $0}'
             HOTFIX_VERSION=v1.0.1
             git tag $HOTFIX_VERSION
             git push origin $HOTFIX_VERSION
