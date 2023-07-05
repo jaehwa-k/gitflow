@@ -11,20 +11,16 @@ jobs:
     permissions:
       pull-requests: write
     steps:
-      - name: Extract Prefix from Branch Name
-        id: extract_prefix
-        run: |
-          BRANCH_NAME="${{ github.event.pull_request.head.ref }}"
-          PREFIX=$(echo "$BRANCH_NAME" | cut -d'/' -f1)
-          echo "prefix=$PREFIX" >> "$GITHUB_OUTPUT"
-      - uses: actions/github-script@v6
+      - name: Extract Prefix and Add Label
+        uses: actions/github-script@v6
         with:
           script: |
-            const label = "${{ steps.extract_prefix.outputs.prefix }}"
+            const ref = "${{ github.ref }}"
+            const prefix = ref.split('/')[1]
             
             github.rest.issues.addLabels({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              labels: [label],
+              labels: [prefix],
             })
