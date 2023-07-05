@@ -18,7 +18,7 @@ jobs:
             const ref = "${{ github.event.pull_request.head.ref }}"
             const prefix = ref.split('/')[0]
 
-            const logger = "${{ github.head_ref }}"
+            const logger = github.head_ref
 
             github.rest.issues.addLabels({
               issue_number: context.issue.number,
