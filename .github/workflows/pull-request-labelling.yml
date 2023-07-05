@@ -17,10 +17,7 @@ jobs:
           script: |
             const ref = "${{ github.event.pull_request.head.ref }}"
             const prefix = ref.split('/')[0]
-            
-            console.log(context.number)
-            console.log(context.owner, context.repo, context.repo.owner, context.repo.repo)
-            
+
             github.rest.issues.addLabels({
               issue_number: context.issue.number,
               owner: context.repo.owner,
