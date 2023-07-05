@@ -15,8 +15,13 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
+            const github = github
+            const context = context
             const ref = "${{ github.event.pull_request.head.ref }}"
             const prefix = ref.split('/')[0]
+            
+            console.log(github)
+            console.log(context)
             
             github.rest.issues.addLabels({
               issue_number: context.issue.number,
