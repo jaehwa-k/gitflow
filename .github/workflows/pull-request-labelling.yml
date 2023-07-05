@@ -1,8 +1,4 @@
 name: Label issues
-
-permissions:
-  pull-requests: write
-
 on:
   pull_request:
     branches:
@@ -10,6 +6,8 @@ on:
 jobs:
   label_issues:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
       - name: Extract Prefix from Branch Name
         id: extract_prefix
