@@ -19,6 +19,7 @@ jobs:
             const prefix = ref.split('/')[0]
 
             const logger = github.head_ref
+            console.log(logger)
 
             github.rest.issues.addLabels({
               issue_number: context.issue.number,
