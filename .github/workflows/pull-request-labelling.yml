@@ -1,8 +1,10 @@
 name: Label issues
+
 on:
   pull_request:
     branches:
       - develop
+
 jobs:
   label_issues:
     runs-on: ubuntu-latest
