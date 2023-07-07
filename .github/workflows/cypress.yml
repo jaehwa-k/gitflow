@@ -1,0 +1,12 @@
+name: Cypress Test
+
+on:
+  pull_request:
+
+jobs:
+  cypress-test:
+    runs-on: ubuntu-latest
+    name: component test
+    steps:
+      - name: cypress test
+        run: npx cypress run --component
