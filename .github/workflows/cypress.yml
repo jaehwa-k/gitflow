@@ -15,5 +15,6 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
+          working-directory: component
           component: true
           browser: chrome
