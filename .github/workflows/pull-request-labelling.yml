@@ -1,4 +1,7 @@
-name: Label issues
+name: Extract Branch Prefix and Add Label
+
+permissions:
+  pull-requests: write
 
 on:
   pull_request:
@@ -6,21 +9,22 @@ on:
       - develop
 
 jobs:
-  label_issues:
+  add-label-to-pull-request:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
+
     steps:
-      - name: Extract Prefix and Add Label
+      - name: Add Label to Pull Request
         uses: actions/github-script@v6
         with:
           script: |
-            const ref = "${{ github.ref }}"
-            const prefix = ref.split('/')[1]
+            const branchName = "${{github.head_ref}}";
+            const prefix = branchName.split('/')[0];
             
-            github.rest.issues.addLabels({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              labels: [prefix],
-            })
+            if(['hotfix', 'feature'].includes(prefix)){
+              github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                labels: [prefix],
+              });
+            };

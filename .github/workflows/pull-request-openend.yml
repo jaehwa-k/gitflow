@@ -1,0 +1,17 @@
+name: When Pull Request Opened Activated
+
+on:
+  pull_request:
+    issues:
+      - opened
+      - closed
+    branches:
+      - develop
+
+jobs:
+  do-nothing:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Pull Request Opened And Closed
+        run: echo "Do Nothing"
