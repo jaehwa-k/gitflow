@@ -13,4 +13,5 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Add Label to Pull Request
+      - name: Pull Request Opened And Closed
+        run: echo "Do Nothing"
