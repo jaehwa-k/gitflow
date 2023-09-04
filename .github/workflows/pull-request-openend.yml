@@ -1,0 +1,15 @@
+name: When Pull Request Opened Activated
+
+on:
+  pull_request:
+    issues:
+      - opened
+    branches:
+      - develop
+
+jobs:
+  do-nothing:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Add Label to Pull Request
