@@ -2,9 +2,7 @@ name: When Pull Request Opened Activated
 
 on:
   pull_request:
-    issues:
-      - opened
-      - closed
+    types: [opened, closed]
     branches:
       - develop
 
