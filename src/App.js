@@ -1,7 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
 function App() {
-    console.log('asdada')
   return (
     <div className="App">
       <header className="App-header">
@@ -13,5 +12,7 @@ function App() {
     </div>
   );
 }
+
+console.log('app')
 
 export default App;
