@@ -12,5 +12,5 @@ function App() {
     </div>
   );
 }
-
+console.log('ada')
 export default App;
