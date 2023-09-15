@@ -15,8 +15,7 @@ jobs:
           id: hotfix-version
           run: |
             HOTFIX_VERSION=`git describe --tags --abbrev=0 | awk -F. '{OFS="."; $NF+=1; print $0}'`
-            RELEASE_VERSION="${HOTFIX_VERSION:1}"
-            echo "ABCD=${RELEASE_VERSION}" >> $GITHUB_OUTPUT
+            echo "HOTFIX_VERSION=${HOTFIX_VERSION}" >> $GITHUB_OUTPUT
         - name: tagging version
           run: |
             echo "${{ steps.hotfix-version.outputs.RELEASE_VERSION }}"
