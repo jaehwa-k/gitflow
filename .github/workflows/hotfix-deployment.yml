@@ -11,6 +11,12 @@ jobs:
           with:
             fetch-depth: 0
             ref: main
+        - name: Set dynamic variable
+          id: set-dynamic-variable
+          run: |
+            MY_ID=123
+            DYNAMIC_VARIABLE="prefix_${MY_ID}"
+            echo "DYNAMIC_VALUE=$DYNAMIC_VARIABLE" >> $GITHUB_OUTPUT
         - name: generate hotfix version
           id: hotfix-version
           run: |
@@ -19,3 +25,4 @@ jobs:
         - name: tagging version
           run: |
             echo "${{ steps.hotfix-version.outputs.RELEASE_VERSION }}"
+            echo "${{ steps.set-dynamic-variable.outputs.DYNAMIC_VALUE }}"
