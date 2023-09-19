@@ -21,6 +21,7 @@ jobs:
           id: hotfix-version
           run: |
             HOTFIX_VERSION=`git describe --tags --abbrev=0 | awk -F. '{OFS="."; $NF+=1; print $0}'`
+            echo $HOTFIX_VERSION
             echo "HOTFIX_VERSION=$HOTFIX_VERSION" >> $GITHUB_OUTPUT
         - name: tagging version
           run: |
