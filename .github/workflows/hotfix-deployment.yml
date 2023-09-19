@@ -1,7 +1,6 @@
 name: Hotfix Deployment
 on:
   pull_request:
-    types: [ opened ]
 jobs:
   deploy-hotfix:
     name: create hotfix tag
