@@ -20,6 +20,7 @@ jobs:
         - name: generate hotfix version
           id: hotfix-version
           run: |
+            git describe --tags
             HOTFIX_VERSION=`git describe --tags --abbrev=0 | awk -F. '{OFS="."; $NF+=1; print $0}'`
             echo $HOTFIX_VERSION
             echo "HOTFIX_VERSION=$HOTFIX_VERSION" >> $GITHUB_OUTPUT
