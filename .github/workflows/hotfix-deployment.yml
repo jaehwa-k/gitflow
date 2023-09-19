@@ -1,7 +1,6 @@
 name: Hotfix Deployment
 on:
   pull_request:
-    types: [ opened ]
 jobs:
     deploy-hotfix:
         name: create hotfix tag
@@ -12,11 +11,18 @@ jobs:
           with:
             fetch-depth: 0
             ref: main
+        - name: Set dynamic variable
+          id: set-dynamic-variable
+          run: |
+            MY_ID=123
+            DYNAMIC_VARIABLE="prefix_${MY_ID}"
+            echo "DYNAMIC_VALUE=$DYNAMIC_VARIABLE" >> $GITHUB_OUTPUT
         - name: generate hotfix version
           id: hotfix-version
           run: |
-            HOTFIX_VERSION=`git describe --tags --abbrev=0 | awk -F. '{OFS="."; $NF+=1; print $0}'`
-            echo "RELEASE_VERSION=${HOTFIX_VERSION:1}" >> $GITHUB_OUTPUT
+            HOTFIX_VERSION=`git describe --tags`
+            echo "HOTFIX_VERSION=$HOTFIX_VERSION" >> $GITHUB_OUTPUT
         - name: tagging version
           run: |
             echo "${{ steps.hotfix-version.outputs.RELEASE_VERSION }}"
+            echo "${{ steps.set-dynamic-variable.outputs.DYNAMIC_VALUE }}"
