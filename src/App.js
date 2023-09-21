@@ -12,4 +12,5 @@ function App() {
     </div>
   );
 }
+console.log('dfs')
 export default App;
